@@ -1,0 +1,127 @@
+﻿@model user
+@{
+    ViewBag.Title = "edit";
+}
+
+<br />
+<br />
+<div class="container register">
+    <div class="row">
+        <form method="post" enctype="multipart/form-data">
+            <div class="row register-form">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.HiddenFor(n => n.id)
+                    </div>
+                    <div class="form-group">
+                        <div> @Html.LabelFor(n => n.name)</div>
+                        <div>@Html.TextBoxFor(n => n.name, new { @class = "form-control", placeholder = "User name" })</div>
+                        <div>@Html.ValidationMessageFor(n => n.name)</div>
+                    </div>
+                    <div class="form-group">
+                        <div> @Html.LabelFor(n => n.email)</div>
+                        <div>@Html.TextBoxFor(n => n.email, new { @class = "form-control", placeholder = "Email" })</div>
+                        <div>@Html.ValidationMessageFor(n => n.email)</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <div> @Html.LabelFor(n => n.photo)</div>
+                            <img src="~/attach/@Model.photo" width="100" height="100" />
+                            <input type="file" class="custom-file-input" name="Photo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*<div> @Html.LabelFor(n => n.confirm_password)</div>*@
+                        <div>@Html.TextBoxFor(n => n.confirm_password, new { @class = "hidden", placeholder = "Confirm Password", Value = @Model.password })</div>
+                        <div>@Html.ValidationMessageFor(n => n.confirm_password)</div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div> @Html.LabelFor(n => n.national_id)</div>
+                        <div>@Html.TextBoxFor(n => n.national_id, new { @class = "form-control", placeholder = "National ID" })</div>
+                        <div>@Html.ValidationMessageFor(n => n.national_id)</div>
+                    </div>
+                    <div class="form-group">
+                        <div> @Html.LabelFor(n => n.age)</div>
+                        <div>@Html.TextBoxFor(n => n.age, new { @class = "form-control", placeholder = "Age" })</div>
+                        <div>@Html.ValidationMessageFor(n => n.age)</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <div> @Html.LabelFor(n => n.cv)</div>
+                            <a href="~/attach/@Model.cv">@Model.cv</a>
+                            <input type="file" class="custom-file-input" id="customInput" name="cv">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*<div> @Html.LabelFor(n => n.password)</div>*@
+                        <div>@Html.TextBoxFor(n => n.password, new { @class = "hidden", placeholder = "Password" })</div>
+                        <div>@Html.ValidationMessageFor(n => n.password)</div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div> @Html.HiddenFor(n => n.skills)</div>
+                        <table class="table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        @*@foreach (var item1 in Model.skills)
+                                            {
+                                                @Html.CheckBox(item1.ischecked.ToString(), true, new { @style = "margin: 0px 7px 0px 25px; " })
+                                                @Html.Name(item1.name)
+                                            }*@
+                                        @*@foreach (var item2 in (List<Crud_Mvc.Models.skill>)ViewBag.dept)
+                                            {
+                                                @Html.CheckBox(item2.name, new { @style = "margin: 0px 7px 0px 25px; " })
+                                                @Html.Name(item2.name)
+                                            }*@
+                                        @*@foreach (var item1 in Model.skills)
+                                            {
+                                                @Html.CheckBox(item1.name, true, new { @style = "margin: 0px 7px 0px 25px; " })
+                                                @Html.Name(item1.name)
+                                            }*@
+                                        @*@foreach (var item2 in (List<Crud_Mvc.Models.skill>)ViewBag.dept)
+                                            {
+                                            @Html.CheckBox(item2.name, new { @style = "margin: 0px 7px 0px 25px; " })
+                                            @Html.Name(item2.name)
+                                            }*@
+                                        @*@for (var i = 0; i < (List<Crud_Mvc.Models.skill>)ViewBag.dept; i++)
+                                            {
+                                                @Html.HiddenFor(x => x.skills[i].id)
+                                                @Html.CheckBoxFor(x => x.skills[i].ischecked, new { @style = "margin: 0px 7px 0px 25px; " })
+                                                @Html.DisplayFor(x => x.skills[i].name)
+                                            }*@
+                                        @*@foreach (var item2 in (List<Crud_Mvc.Models.skill>)ViewBag.dept)
+                                            {
+                                                @Html.Hidden(item2.id.ToString())
+                                                @Html.CheckBox(item2.ischecked.ToString(), new { @style = "margin: 0px 7px 0px 25px; " })
+                                                @Html.Name(item2.name)
+                                            }*@
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <br />
+                        <br />
+                        <input type="submit" class="btn btn-light" value="Update" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+}

@@ -1,0 +1,76 @@
+﻿@using PagedList.Mvc
+@model PagedList.PagedList<user>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+@Html.ActionLink("Create New", "create", null, new { @class = "btn btn-primary" })
+<br />
+<div class="text-center">
+    <form class="form-inline my-2 my-lg-0">
+        @Html.TextBox("Search", null, new { @class = "form-control mr-sm-2", placeholder = "Search" })
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" />
+    </form>
+</div>
+<br />
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.ActionLink("Name", "index", new { sortedby = "name" })
+            </th>
+            <th scope="col">
+                @Html.ActionLink("E-Mail", "index", new { sortedby = "email" })
+            </th>
+            <th scope="col">
+                @Html.ActionLink("Age", "index", new { sortedby = "age" })
+            </th>
+            <th scope="col">
+                National_id
+            </th>
+            <th scope="col">
+                Photo
+            </th>
+            <th scope="col">
+                Skills
+            </th>
+            <th scope="col">
+                Cv
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(n => item.name)
+                </td>
+                <td>
+                    @item.email
+                </td>
+                <td>
+                    @item.age
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.national_id)
+                </td>
+                <td>
+                    <img src="~/attach/@item.photo" width="100" height="100" />
+                </td>
+                <td>
+                    @foreach (var items in item.skills)
+                    {
+                        @Html.Name(items.name)
+                        <br />
+                    }
+                </td>
+                <td>@item.cv</td>
+            </tr>
+        </tbody>
+    }
+</table>
+@Html.PagedListPager(Model, n => Url.Action("index", new { pageno = n, sortedby = ViewBag.sort, search = ViewBag.search }))

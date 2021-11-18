@@ -1,0 +1,90 @@
+﻿@model user
+@{
+    ViewBag.Title = "create";
+}
+
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+            <h3>Welcome</h3>
+        </div>
+        <div class="col-md-9 register-right">
+            <form method="post" enctype="multipart/form-data">
+                <h3 class="register-heading">Registration</h3>
+                <div class="row register-form">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div>@Html.TextBoxFor(n => n.name, new { @class = "form-control", placeholder = "User name" })</div>
+                            <div>@Html.ValidationMessageFor(n => n.name)</div>
+                        </div>
+                        <div class="form-group">
+                            <div>@Html.TextBoxFor(n => n.email, new { @class = "form-control", placeholder = "Email" })</div>
+                            <div>@Html.ValidationMessageFor(n => n.email)</div>
+                        </div>
+                        <div class="form-group">
+                            <div>@Html.PasswordFor(n => n.password, new { @class = "form-control", placeholder = "Password" })</div>
+                            <div>@Html.ValidationMessageFor(n => n.password)</div>
+                        </div>
+                        <div class="form-group">
+                            <div>@Html.PasswordFor(n => n.confirm_password, new { @class = "form-control", placeholder = "Confirm Password" })</div>
+                            <div>@Html.ValidationMessageFor(n => n.confirm_password)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div>@Html.TextBoxFor(n => n.national_id, new { @class = "form-control", placeholder = "National Id" })</div>
+                            <div>@Html.ValidationMessageFor(n => n.national_id)</div>
+                        </div>
+                        <div class="form-group">
+                            <div>@Html.TextBoxFor(n => n.age, new { @class = "form-control", placeholder = "Age" })</div>
+                            <div>@Html.ValidationMessageFor(n => n.age)</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="Photo">
+                                <label class="custom-file-label" for="customInput">Choose Photo...</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customInput" name="cv">
+                                <label class="custom-file-label" for="customInput">Choose Cv...</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div> @Html.LabelFor(n => n.skills)</div>
+                            <table class="table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            @for (int i = 0; i < Model.skills.Count; i++)
+                                            {
+                                                @Html.HiddenFor(x => x.skills[i].id)
+                                                @Html.CheckBoxFor(x => x.skills[i].ischecked, new { @style = "margin: 0px 7px 0px 25px; " })
+                                                @Html.DisplayFor(x => x.skills[i].name)
+                                            }
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnRegister" value="Register" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+}

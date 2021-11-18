@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Crud_Mvc.Models.news>
+
+@{
+    ViewBag.Title = "allcatalogs";
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">
+                Catalog
+            </th>
+            <th scope="col">
+                Username
+            </th>
+            <th scope="col">
+                Title
+            </th>
+            <th scope="col">
+                Bref
+            </th>
+            <th scope="col">
+                Desc
+            </th>
+            <th scope="col">
+                Photo
+            </th>
+            <th scope="col">
+                Datetime
+            </th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tbody>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.catalog.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.user.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bref)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc)
+                </td>
+                <td>
+                    <img src="~/attach/@item.photo" width="100" height="100" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.datetime)
+                </td>
+            </tr>
+        </tbody>
+
+     }
+</table>

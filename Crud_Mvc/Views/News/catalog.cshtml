@@ -1,0 +1,38 @@
+﻿@model List<Crud_Mvc.Models.news>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    <br />
+    <div class="col-md-10">
+        @Html.DropDownList("catalog_id", null, "Catalog", htmlAttributes: new { @class = "form-control", @style = "width:100px"})
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Create New", "create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<div id="d1">
+    <br />
+
+</div>
+@section scripts{
+    <script>
+        $("#catalog_id").on("change", function () {
+            let id = $("#catalog_id").val();
+            $("#d1").load("/News/newsbycatalog?catalog_id=" + id);
+        })
+        $(function () {
+            $.ajax({
+                url: '/News/newsbycatalog',
+                method: 'GET',
+                success: function (data) {
+                    $("#d1").append(data);
+                },
+                error: function (error) {
+                }
+            })
+        })
+    </script>
+}

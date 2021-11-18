@@ -1,0 +1,67 @@
+﻿@using PagedList.Mvc
+@model PagedList.PagedList<news>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+@Html.ActionLink("Create New", "create", null, new { @class = "btn btn-primary" })
+<br />
+<div class="text-center">
+    <form class="form-inline my-2 my-lg-0">
+        @Html.TextBox("Search", null, new { @class = "form-control mr-sm-2", placeholder = "Search" })
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" />
+    </form>
+</div>
+<br />
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">
+                Catalog
+            </th>
+            <th scope="col">
+                @Html.ActionLink("Title", "index", new { sortedby = "title" })
+            </th>
+            <th scope="col">
+                Bref
+            </th>
+            <th scope="col">
+                Photo
+            </th>
+            <th scope="col">
+                @Html.ActionLink("Datetime", "index", new { sortedby = "datetime" })
+            </th>
+            <th scope="col">
+
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.catalog.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bref)
+                </td>
+                <td>
+                    <img src="~/attach/@item.photo" width="100" height="100" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.datetime)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-info" })
+                </td>
+            </tr>
+        </tbody>
+    }
+</table>
+@Html.PagedListPager(Model, n => Url.Action("index", new { pageno = n, sortedby = ViewBag.sort, search = ViewBag.search }))

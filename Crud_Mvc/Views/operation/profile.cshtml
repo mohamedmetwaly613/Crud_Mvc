@@ -1,0 +1,188 @@
+﻿@model user
+@{
+    ViewBag.Title = "profile";
+}
+<br />
+<div class="col-md-3">
+    <img src="~/attach/@Model.photo" width="100" height="100" />
+</div>
+<div class="col-md-9">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.national_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.national_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cv)
+        </dd>
+
+    </dl>
+</div>
+<div class="text-center" style="margin-top:15%;">
+    @Html.ActionLink("Create News", "create", "News", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Edit", "Edit", "User", new { id = Model.id }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Change password", "Changepassword", "operation", new { id = Model.id }, new { @class = "btn btn-warning" })
+    <button type="button" class="btn btn-danger" onclick="showUserDeleteBox1(id = @Model.id)">Delete Account</button>
+</div>
+@{
+    int x = 0;
+}
+@foreach (var item in Model.news)
+{
+    x = item.id;
+}
+@if (x != 0)
+{
+    <hr />
+    <h3>News</h3>
+    <br />
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Catalog
+                </th>
+                <th scope="col">
+                    Username
+                </th>
+                <th scope="col">
+                    Title
+                </th>
+                <th scope="col">
+                    Bref
+                </th>
+                <th scope="col">
+                    Desc
+                </th>
+                <th scope="col">
+                    Photo
+                </th>
+                <th scope="col">
+                    Datetime
+                </th>
+                <th scope="col">
+
+                </th>
+                <th scope="col">
+
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.news)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.catalog.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.user.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bref)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.desc)
+                    </td>
+                    <td>
+                        <img src="~/attach/@item.photo" width="100" height="100" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.datetime)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "News", new { id = item.id }, new { @class = "btn btn-info" })
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="showUserDeleteBox(@item.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+}
+    @*@Html.PagedListPager(Model, n => Url.Action("index", new { pageno = n, sortedby = ViewBag.sort, search = ViewBag.search }))*@
+
+@section scripts
+{
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function showUserDeleteBox(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success',
+                    window.location.href = '../News/Delete/' + id
+                )
+            }
+        })
+    }
+
+    function showUserDeleteBox1(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success',
+                    window.location.href = '../User/delete/' + id
+                )
+            }
+        })
+    }
+</script>
+}

@@ -1,0 +1,6 @@
+﻿
+
+@foreach (var item in (List<catalog>)ViewBag.cat)
+{
+    <li>@Html.ActionLink(item.name, "allcatalogs", "News", new { id = item.id },null)</li>
+}
